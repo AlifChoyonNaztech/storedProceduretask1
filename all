@@ -1,0 +1,135 @@
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_AccountNoBrightonGreaterThan800]    Script Date: 1/31/2019 5:26:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_AccountNoBrightonGreaterThan800]
+AS
+BEGIN
+select * from account where balance>800 AND branch_name ='Brighton'
+END
+
+
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_AccountNoGreaterThan700]    Script Date: 1/31/2019 5:27:10 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_AccountNoGreaterThan700]
+AS
+BEGIN
+select account_number from account where balance>700
+END
+
+
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_BranchNameAssetsBetween1to4m]    Script Date: 1/31/2019 5:27:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_BranchNameAssetsBetween1to4m]
+AS
+BEGIN
+select branch_name from branch where assets >=1000000 and assets<=4000000
+END
+
+
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_BranchNameAssetsInThousands]    Script Date: 1/31/2019 5:28:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_BranchNameAssetsInThousands]
+AS
+BEGIN
+select branch_name,assets/1000 as 'assets in thousands' from branch
+END
+
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_DisplayEntireBranch]    Script Date: 1/31/2019 5:28:26 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_DisplayEntireBranch]
+AS
+BEGIN
+select * from branch
+END
+
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_FindNameOFAllCustomer]    Script Date: 1/31/2019 5:28:37 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_FindNameOFAllCustomer]
+AS
+BEGIN
+select customer_name from customer
+END
+
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_NameAccountNumberBalanceHavingAccount]    Script Date: 1/31/2019 5:28:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_NameAccountNumberBalanceHavingAccount]
+AS
+BEGIN
+select customer_name, depositor.account_number,balance from account join depositor on account.account_number=depositor.account_number 
+END
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_NameAccountNumberBalanceHavingAccountBalanceLess400]    Script Date: 1/31/2019 5:29:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_NameAccountNumberBalanceHavingAccountBalanceLess400]
+AS
+BEGIN
+select customer_name, depositor.account_number,balance from account join depositor on account.account_number=depositor.account_number 
+where balance <400
+END
+
+USE [BankAccountMNG]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ac_NameOfAllBranchesInLoanRelation]    Script Date: 1/31/2019 5:29:26 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_ac_NameOfAllBranchesInLoanRelation]
+AS
+BEGIN
+select DISTINCT branch_name from loan
+END
